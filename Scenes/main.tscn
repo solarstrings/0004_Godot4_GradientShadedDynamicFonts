@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://cvas57o3du5gu"]
+
+[ext_resource type="FontFile" uid="uid://o4l2601hp2ta" path="res://Assets/Fonts/league-gothic.regular.ttf" id="1_hs20a"]
+[ext_resource type="Shader" path="res://Assets/Shaders/TextGradient.gdshader" id="1_pddd7"]
+
+[sub_resource type="Gradient" id="Gradient_stws6"]
+offsets = PackedFloat32Array(0.210811, 0.756757)
+colors = PackedColorArray(0.305403, 0.233624, 0, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_i6dba"]
+gradient = SubResource("Gradient_stws6")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lkp3o"]
+shader = ExtResource("1_pddd7")
+shader_parameter/gradient_mix_amount = -0.5
+shader_parameter/gradient = SubResource("GradientTexture1D_i6dba")
+
+[node name="Main" type="Node2D"]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+material = SubResource("ShaderMaterial_lkp3o")
+offset_right = 445.0
+offset_bottom = 61.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(445, 61)
+render_target_update_mode = 4
+
+[node name="Text" type="Label" parent="SubViewportContainer/SubViewport"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("1_hs20a")
+theme_override_font_sizes/font_size = 50
+text = "This Is My Gradient Shaded Text"
